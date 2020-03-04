@@ -92,7 +92,7 @@ For Linux/macOS, run `make doc`.
             "name": "Compile thesis",
             "tools": [
                 "xelatex",
-                "bibtex",
+                "biber",
                 "xelatex",
                 "xelatex"
             ]
