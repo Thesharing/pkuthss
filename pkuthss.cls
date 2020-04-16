@@ -1,7 +1,7 @@
 % Peking University dissertation document class
 %
 % Copyright (c) 2008-2009 solvethis
-% Copyright (c) 2010-2018 Casper Ti. Vector
+% Copyright (c) 2010-2019 Casper Ti. Vector
 %
 % This work may be distributed and/or modified under the conditions of the
 % LaTeX Project Public License, either version 1.3 of this license or (at
@@ -23,7 +23,7 @@
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{pkuthss}
-	[2018/07/02 v1.8.0 Peking University dissertation document class]
+	[2019/11/17 v1.8.2 Peking University dissertation document class]
 
 % eg. `\thss@int@boolopt{spacing}{true}' will expand to:
 %   \newif\ifthss@opt@spacing \thss@opt@spacingtrue
@@ -67,6 +67,9 @@
 
 % Prevent fontspec (loaded by xeCJK) from interfering with newtxmath.
 \ifthss@opt@pkufont\PassOptionsToPackage{no-math}{fontspec}\fi
+% Work around the `\lvert already defined' error.
+% cf. <https://github.com/CTeX-org/ctex-kit/issues/454>.
+\ifthss@opt@pkufont\RequirePackage{amsmath}\fi
 % pkuthss is based on ctexbook; we use `xiao 4' as default font size.
 \LoadClass[zihao = -4]{ctexbook}[2014/03/06]
 % ctex 2.x no longer loads ifpdf and ifxetex by itself.
@@ -134,7 +137,7 @@
 	}
 	% Use circled numbers as footnote symbols. Does not affect title page, but
 	% footnote is rarely used in dissertation covers ;)
-	\renewcommand\thefootnote%
+	\renewcommand*{\thefootnote}%
 		{\protect\thss@int@circled{\arabic{footnote}}}
 	% Provides utility to modify footnote spacing.
 	% Option used to make sure it does not render interleaf pages totally blank.
@@ -179,14 +182,14 @@
 \ifthss@opt@spechap
 	% This command is used to start a chapter without numbering, and correctly set
 	% up the headers and footers in the chapter.
-	\newcommand\specialchap[1]{%
+	\newcommand{\specialchap}[1]{%
 		\chapter*{#1}\addcontentsline{toc}{chapter}{#1}
 		\markboth{#1}{}\phantomsection%
 	}
 \fi
 
 \AtBeginDocument{
-	% Set up spacing for displayed formulas.
+	% Set up spacing for displayed formulae.
 	\setlength{\abovedisplayskip}{\belowdisplayshortskip}
 	\setlength{\belowdisplayskip}{\abovedisplayskip}
 
@@ -204,10 +207,8 @@
 		% Use English properties to avoid problems with character encodings.
 		\newcommand*{\setpdfproperties}{%
 			\hypersetup{
-				pdfauthor = {\@eauthor}, 
-				pdftitle = {\@etitle},
-				pdfsubject = {\euniversity\ \ethesisname}, 
-				pdfkeywords = {\@ekeywords}
+				pdfauthor = {\@eauthor}, pdftitle = {\@etitle},
+				pdfsubject = {\euniversity\ \ethesisname}, pdfkeywords = {\@ekeywords}
 			}%
 		}
 		% Set up the properties when generating the title page because the document
@@ -215,7 +216,7 @@
 		\let\thss@tmp@maketitle\maketitle
 		% NOTE: `\hypersetup' must appear before `\maketitle', otherwise it might
 		% not act as expected.
-		\renewcommand\maketitle{\setpdfproperties\thss@tmp@maketitle}
+		\renewcommand{\maketitle}{\setpdfproperties\thss@tmp@maketitle}
 	\fi
 }
 
@@ -258,7 +259,7 @@
 % Set up page layout.
 \geometry{
 	a4paper, hmargin = 2.6cm, top = 2.92cm, bottom = 3.03cm,
-	headheight = 0.45cm, headsep = 0.55cm, footskip = 1.05cm
+	headheight = 0.45cm, headsep = 0.59cm, footskip = 1.05cm
 }
 
 % Set up chapter/section/... captions.
@@ -273,11 +274,11 @@
 		beforeskip = {0bp}, afterskip = {18bp plus 0.2ex},
 		nameformat = {}, titleformat = {}
 	}, section =
-		{beforeskip = {20bp plus 1ex minus 0.2ex}, afterskip = {6bp plus 0.2ex}},
+		{beforeskip = {20bp plus 1ex minus 0.2ex}, afterskip = {5bp plus 0.2ex}},
 	subsection =
-		{beforeskip = {12bp plus 1ex minus 0.2ex}, afterskip = {6bp plus 0.2ex}},
+		{beforeskip = {12bp plus 1ex minus 0.2ex}, afterskip = {5bp plus 0.2ex}},
 	subsubsection =
-		{beforeskip = {12bp plus 1ex minus 0.2ex}, afterskip = {6bp plus 0.2ex}}
+		{beforeskip = {12bp plus 1ex minus 0.2ex}, afterskip = {5bp plus 0.2ex}}
 }
 \ifthss@opt@ugly
 	\ctexset{
@@ -355,7 +356,7 @@
 \renewcommand{\maketitle}{%
 	\thss@int@pdfmark{\titlepagename}{titlepage}
 	% Make the title page centered.
-	\begin{titlepage}\begin{center}
+	\begin{titlepage}\begingroup\centering
 		% Emblem and inscription of the university, and type of thesis.
 		{%
 			\zihao{1}%
@@ -370,7 +371,7 @@
 		% Title of the thesis.
 		{%
 			\zihao{2}{\label@ctitle}\linespread{1.6}\selectfont%
-			\thss@int@fillinblank{3}{0.64\textwidth}{\textbf{\@ctitle}}%
+			\thss@int@fillinblank{2}{0.64\textwidth}{\textbf{\@ctitle}}%
 		}
 		\vfill
 		% Information about the author.
@@ -396,7 +397,7 @@
 		\vfill
 		% Date.
 		{\zihao{3}\@date}
-	\end{center}\end{titlepage}%
+	\par\endgroup\end{titlepage}%
 }
 
 % Typeset the Chinese abstract.

@@ -22,7 +22,7 @@
 %   pkuword.eps
 
 \ProvidesFile{pkuthss-gbk.def}
-	[2018/07/02 v1.8.0 Labels and captions in GBK encoding
+	[2019/11/17 v1.8.2 Labels and captions in GBK encoding
 		for the pkuthss document class]
 
 \def\label@ctitle{题目：}
@@ -31,10 +31,10 @@
 \def\label@school{院\hphantom{汉字}系：}
 \def\label@cmajor{专\hphantom{汉字}业：}
 \def\label@direction{研究方向：}
-\def\label@cmentor{导\hphantom{汉字}师：}
+\def\label@cmentor{导师姓名：}
 \def\label@ementor{Directed by\ }
 \def\label@ckeywords{关键词：}
-\def\label@ekeywords{KEYWORDS:\ }
+\def\label@ekeywords{KEY WORDS:\ }
 
 \def\titlepagename{封面}
 \def\cuniversity{北京大学}

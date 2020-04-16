@@ -15,11 +15,7 @@ Source: [CasperVector/pkuthss](https://github.com/CasperVector/pkuthss)
 * 将页眉修改为“硕士学位论文”（如果需要修改成其他的，参考pkuthss.cls的313行）
 * 修改了封面标题的字体大小
 * 为中英文关键字添加了缩进
-* 将Bibtex的排序方式修改为引用顺序制
-
-### How to install original version?
-
-参考 [TeX Live + pkuthss 安装使用傻瓜指南 v0.1.6](https://bbs.pku.edu.cn/v2/post-read-single.php?bid=346&type=0&postid=18114839)
+* 将Bibtex模板由CapserVector改为biblatex-gb7714-2015
 
 ## Environment
 
@@ -27,13 +23,13 @@ Source: [CasperVector/pkuthss](https://github.com/CasperVector/pkuthss)
 
 For TeX compiler:
 
-1. Install TeXLive 2019 [here](https://www.tug.org/texlive/).
+1. Install TeXLive 2020 [here](https://www.tug.org/texlive/).
 
 For editor:
 
 1. Install Visual Studio Code [here](https://code.visualstudio.com/).
 2. Install LaTeX Workshop [here](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop).
-3. Install LaTeX Untilities [here](https://marketplace.visualstudio.com/items?itemName=tecosaur.latex-utilities)
+3. Install LaTeX Untilities [here](https://marketplace.visualstudio.com/items?itemName=tecosaur.latex-utilities).
 
 For bibliography:
 
@@ -55,6 +51,7 @@ For Linux/macOS, run `make doc`.
 
 1. [TeX Live + pkuthss 安装使用傻瓜指南 v0.1.6](https://bbs.pku.edu.cn/v2/post-read-single.php?bid=346&type=0&postid=18114839)
 2. [CasperVector/pkuthss](https://github.com/CasperVector/pkuthss)
+3. [hushidong/biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015)
 3. [VSCode + LaTeX](https://zhuanlan.zhihu.com/p/108095566)
 4. [使用VSCode编写LaTeX](https://zhuanlan.zhihu.com/p/38178015)
 5. [VS Code 与 LaTeX 真乃天作之合](https://www.jianshu.com/p/57f8d1e026f5)
